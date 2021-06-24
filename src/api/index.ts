@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { INoteForm, INoteResponse } from "interfaces/note";
 
 const apiNotes = axios.create({
-  baseURL: "https://notes-app-wine-ten.vercel.app/api",
+  baseURL: "https://notes-app-dody.vercel.app/api",
 });
 
 export const getNotes = (): Promise<AxiosResponse<INoteResponse>> => {
