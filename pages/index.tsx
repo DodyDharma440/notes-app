@@ -6,15 +6,15 @@ import { INote } from "interfaces/note";
 import { NotesContext } from "context/notes";
 import { Notes } from "components/index";
 
-// type Props = {
-//   notesProps: INote[];
-// };
+type Props = {
+  notesProps: INote[];
+};
 
-const Home = () => {
+const Home: React.FC<Props> = ({ notesProps }) => {
   const { setNotes } = useContext(NotesContext);
 
   useEffect(() => {
-    setNotes([]);
+    setNotes(notesProps);
   }, []);
 
   return (
@@ -29,12 +29,12 @@ const Home = () => {
 
 export default Home;
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   const res = await getNotes();
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await getNotes();
 
-//   return {
-//     props: {
-//       notesProps: res.data.notes,
-//     },
-//   };
-// };
+  return {
+    props: {
+      notesProps: res.data.notes,
+    },
+  };
+};
