@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "utils/dbConnect";
 import Note from "models/Note";
 import { INoteResponse, INoteForm } from "interfaces/note";
+import Cors from "cors";
+import { NextCors } from "middleware/cors";
 
 dbConnect();
 
@@ -11,6 +13,12 @@ export default async (
 ) => {
   const { id } = req.query;
   const formData: INoteForm = req.body;
+
+  const cors = Cors({
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  });
+
+  await NextCors(req, res, cors);
 
   switch (req.method) {
     case "GET":

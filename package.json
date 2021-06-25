@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.2.1",
+    "@types/cors": "^2.8.10",
     "@types/nprogress": "^0.2.0",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
+    "cors": "^2.8.5",
     "mongoose": "^5.12.14",
     "next": "11.0.0",
     "nprogress": "^0.2.0",

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetServerSideProps } from "next";
 import { HiOutlineTrash, HiOutlinePencilAlt } from "react-icons/hi";
-import { getNotes, getNote } from "api/index";
+import { getNote } from "api/index";
 import { INote } from "interfaces/note";
 import { IconButton, Modal } from "components/index";
 import { CgDanger } from "react-icons/cg";
@@ -89,24 +89,7 @@ const Note: React.FC<Props> = ({ note }) => {
 
 export default Note;
 
-export const getStaticPaths = async () => {
-  const { data } = await getNotes();
-
-  const paths = data?.notes?.map((note: INote) => {
-    return {
-      params: {
-        id: note._id,
-      },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { data } = await getNote(params && params.id);
 
   if (!data) {

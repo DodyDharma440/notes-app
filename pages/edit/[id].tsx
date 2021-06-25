@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetServerSideProps } from "next";
 import { INote, INoteForm } from "interfaces/note";
-import { getNotes, getNote } from "api/index";
+import { getNote } from "api/index";
 import { NotesContext } from "context/notes";
 import { Form } from "components/index";
 import { updateNote } from "api/index";
@@ -79,24 +79,7 @@ const Edit: React.FC<Props> = ({ note }) => {
 
 export default Edit;
 
-export const getStaticPaths = async () => {
-  const { data } = await getNotes();
-
-  const paths = data?.notes?.map((note: INote) => {
-    return {
-      params: {
-        id: note._id,
-      },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { data } = await getNote(params && params.id);
 
   if (!data) {

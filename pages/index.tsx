@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { GetStaticProps } from "next";
+import { GetStaticProps, GetServerSideProps } from "next";
 import Head from "next/head";
 import { getNotes } from "api/index";
 import { INote } from "interfaces/note";
@@ -29,7 +29,7 @@ const Home: React.FC<Props> = ({ notesProps }) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const res = await getNotes();
 
   return {
